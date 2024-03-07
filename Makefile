@@ -46,7 +46,7 @@ ifdef PLATFORM_DIR
   ifdef PLATFORM
     platform_parent_dir=$(platform_dir_path)
   else
-    PLATFORM=$(shell basename $(platform_dir_path))
+    PLATFORM=$(notdir $(basename $(platform_dir_path)))
     platform_parent_dir=$(shell realpath ${platform_dir_path}/..)
   endif
 else
