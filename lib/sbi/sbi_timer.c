@@ -151,9 +151,16 @@ void sbi_timer_event_start(u64 next_event)
 	csr_set(CSR_MIE, MIP_MTIP);
 }
 
+#define CYCLE_ADDR 0x400000000
+
 void sbi_timer_process(void)
 {
+	u64 cycle = csr_read_num(0xC00);
+	u64* p = CYCLE_ADDR;
+	*p = cycle;
+	
 	csr_clear(CSR_MIE, MIP_MTIP);
+
 	/*
 	 * If sstc extension is available, supervisor can receive the timer
 	 * directly without M-mode come in between. This function should
