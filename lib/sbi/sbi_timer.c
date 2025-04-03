@@ -156,7 +156,7 @@ void sbi_timer_event_start(u64 next_event)
 void sbi_timer_process(void)
 {
 	u64 cycle = csr_read_num(0xC00);
-	u64* p = CYCLE_ADDR;
+	u64* p = (u64*)CYCLE_ADDR;
 	*p = cycle;
 	
 	csr_clear(CSR_MIE, MIP_MTIP);
